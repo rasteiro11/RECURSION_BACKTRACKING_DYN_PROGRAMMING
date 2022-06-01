@@ -1,0 +1,59 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collector;
+
+/**
+ * Algorithm
+ */
+public class Algorithm {
+
+    private List<Point> points;
+
+    public Algorithm(List<Point> points) {
+        this.points = points;
+    }
+
+    public double solveProblem() {
+        List<Point> sortedXPoints = new ArrayList<>();
+        List<Point> sortedYPoints = new ArrayList<>();
+
+        for (Point p : this.points) {
+            sortedXPoints.add(p);
+            sortedYPoints.add(p);
+        }
+
+        // we have to sort the items (points) based on X and Y
+        Collections.sort(sortedXPoints, new XSorter());
+        Collections.sort(sortedYPoints, new YSorter());
+
+        return findClosestPoint(sortedXPoints, sortedYPoints, sortedXPoints.size());
+
+    }
+
+    private double findClosestPoint(List<Point> sortedXPoints, List<Point> sortedYPoints, int numOfPoints) {
+
+        if (numOfPoints <= 3)
+            return bruteForceSearch(sortedXPoints);
+
+        int middleIndex = numOfPoints / 2;
+
+        Point middlePoint = sortedXPoints.get(middleIndex);
+
+        // DIVIDE PHASE - we keep dividing the dataset into left and right sub-arrays
+        List<Point> leftSubPointsSortedX = new ArrayList<>();
+        List<Point> rightSubPointsSortedY = new ArrayList<>();
+
+        for (int index = 0; index < numOfPoints; index++) {
+            if (sortedXPoints.get(index).getX() <= middlePoint.getX()) {
+                leftSubPointsSortedX.add(sortedXPoints.get(index));
+            } else {
+
+            }
+
+        }
+
+        return 0;
+    }
+
+}
